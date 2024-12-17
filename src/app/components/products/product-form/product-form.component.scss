@@ -1,0 +1,110 @@
+.form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Full vertical height */
+    background-color: #f5f5f5; /* Light gray background */
+    padding: 1rem;
+  }
+  
+  .product-form-card {
+    max-width: 600px;
+    width: 100%; /* Ensure responsiveness */
+    margin: auto;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2); /* More prominent shadow */
+    background-color: #ffffff;
+  
+    mat-card-title {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #3f51b5;
+      margin-bottom: 0.5rem;
+    }
+  
+    mat-card-subtitle {
+      font-size: 1.2rem;
+      color: #757575;
+    }
+  
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+  
+      @media (min-width: 600px) {
+        grid-template-columns: repeat(2, 1fr);
+      }
+  
+      .form-field {
+        mat-form-field {
+          width: 100%;
+          border-radius: 8px;
+          transition: box-shadow 0.3s ease;
+  
+          &:focus-within {
+            box-shadow: 0px 4px 8px rgba(63, 81, 181, 0.2);
+          }
+        }
+      }
+    }
+  
+    .checkbox-group {
+      margin: 1.5rem 0;
+      display: flex;
+      align-items: center;
+  
+      mat-checkbox {
+        font-size: 1.2rem;
+        color: #3f51b5;
+      }
+    }
+  
+    .form-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 2rem;
+      gap: 1rem;
+  
+      button {
+        min-width: 120px;
+        padding: 0.75rem 1.5rem;
+        border-radius: 8px;
+        font-size: 1rem;
+        font-weight: 500;
+        transition: all 0.3s ease;
+  
+        &.mat-raised-button[color="primary"] {
+          background-color: #3f51b5;
+          color: #fff;
+  
+          &:hover {
+            background-color: #303f9f;
+            box-shadow: 0 4px 10px rgba(63, 81, 181, 0.3);
+          }
+        }
+  
+        &.mat-raised-button[color="warn"] {
+          background-color: #f44336;
+          color: #fff;
+  
+          &:hover {
+            background-color: #d32f2f;
+            box-shadow: 0 4px 10px rgba(244, 67, 54, 0.3);
+          }
+        }
+  
+        &.mat-stroked-button {
+          border-color: #3f51b5;
+          color: #3f51b5;
+  
+          &:hover {
+            background-color: rgba(63, 81, 181, 0.1);
+          }
+        }
+      }
+    }
+  }
+  

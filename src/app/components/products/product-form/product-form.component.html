@@ -1,0 +1,81 @@
+<!-- Form Container -->
+<div class="form-container">
+    <!-- Product Form Card -->
+    <mat-card class="product-form-card">
+      <!-- Card Header -->
+      <mat-card-header style="margin-bottom: 20px;">
+        <mat-card-title>Add Product</mat-card-title>
+        <mat-card-subtitle>Fill out the details to add a new product</mat-card-subtitle>
+      </mat-card-header>
+  
+      <!-- Card Content -->
+      <mat-card-content>
+        <!-- Product Form with Angular Reactive Form Binding -->
+        <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+          
+          <!-- Form Fields Grid -->
+          <div class="form-grid">
+            <!-- Product Name Field -->
+            <mat-form-field appearance="outline" class="form-field">
+              <mat-label>Product Name</mat-label>
+              <input matInput formControlName="name" />
+              <!-- Validation Error Message for Required Name Field -->
+              @if (productForm.get('name')?.hasError('required')) {
+                <mat-error>
+                  Name is required
+                </mat-error>
+              }
+            </mat-form-field>
+  
+            <!-- Product Price Field -->
+            <mat-form-field appearance="outline" class="form-field">
+              <mat-label>Price</mat-label>
+              <input matInput type="number" formControlName="price" />
+              <!-- Validation Error Message for Minimum Price Constraint -->
+              @if (productForm.get('price')?.hasError('min')) {
+                <mat-error>
+                  Price must be greater than 0
+                </mat-error>
+              }
+            </mat-form-field>
+  
+            <!-- Product Category Field -->
+            <mat-form-field appearance="outline" class="form-field">
+              <mat-label>Category</mat-label>
+              <input matInput formControlName="category" />
+              <!-- Validation Error Message for Required Category Field -->
+              @if (productForm.get('category')?.hasError('required')) {
+                <mat-error>
+                  Category is required
+                </mat-error>
+              }
+            </mat-form-field>
+          </div>
+  
+          <!-- Checkbox for In Stock Status -->
+          <div class="checkbox-group">
+            <mat-checkbox formControlName="inStock">In Stock</mat-checkbox>
+          </div>
+  
+          <!-- Form Action Buttons -->
+          <div class="form-actions">
+            <!-- Submit Button -->
+            <button mat-raised-button color="primary" type="submit" [disabled]="productForm.invalid">
+              {{buttonText}}
+            </button>
+  
+            <!-- Reset Button to Clear the Form -->
+            <button mat-raised-button color="warn" type="reset" (click)="productForm.reset()">
+              Reset Form
+            </button>
+  
+            <!-- Back Button to Navigate to the Previous Page -->
+            <button mat-stroked-button color="accent" type="button" (click)="onBack()">
+              Back
+            </button>
+          </div>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  

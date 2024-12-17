@@ -1,0 +1,71 @@
+<!-- Product Cards Container -->
+<div class="product-cards-container">
+    <!-- Check if products exist, use @if -->
+    @if (products() && products().length > 0) {
+      <!-- Product Table -->
+      <table mat-table [dataSource]="products()" class="product-table">
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef> Name </th>
+          <td mat-cell *matCellDef="let product"> {{ product.name }} </td>
+        </ng-container>
+  
+        <!-- Product Category Column -->
+        <ng-container matColumnDef="category">
+          <th mat-header-cell *matHeaderCellDef> Category </th>
+          <td mat-cell *matCellDef="let product"> {{ product.category }} </td>
+        </ng-container>
+  
+        <!-- Price Column -->
+        <ng-container matColumnDef="price">
+          <th mat-header-cell *matHeaderCellDef> Price </th>
+          <td mat-cell *matCellDef="let product"> {{ product.price | currency }} </td>
+        </ng-container>
+  
+        <!-- In Stock Column -->
+        <ng-container matColumnDef="inStock">
+          <th mat-header-cell *matHeaderCellDef> In Stock </th>
+          <td mat-cell *matCellDef="let product">
+            {{ product.inStock ? 'Yes' : 'No' }}
+          </td>
+        </ng-container>
+  
+        <!-- Actions Column -->
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef> Actions </th>
+          <td mat-cell *matCellDef="let product">
+            <button mat-raised-button color="primary" (click)="editProduct(product)" matTooltip="Edit">
+              Edit
+            </button>
+            <button mat-raised-button color="warn" (click)="deleteProduct(product.id)" matTooltip="Delete">
+              Delete
+            </button>
+            <button mat-raised-button (click)="toggleStock(product.id)" matTooltip="Toggle Stock">
+              {{ product.inStock ? 'Mark Out of Stock' : 'Mark In Stock' }}
+            </button>
+          </td>
+        </ng-container>
+  
+        <!-- Table Header and Row Definition -->
+        <tr mat-header-row *matHeaderRowDef="['name', 'category', 'price', 'inStock', 'actions']"></tr>
+        @for (product of products(); track product) {
+          <tr mat-row *matRowDef="let row; columns: ['name', 'category', 'price', 'inStock', 'actions']"></tr>
+        }
+      </table>
+    }
+    @else {
+      <!-- Display message if no products -->
+      <div class="no-products-message">
+        <mat-card class="no-products-card">
+          <mat-card-content>
+            <p>No products available. Please add some products to get started!</p>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    }
+  </div>
+  
+  <!-- Add Product Button -->
+  <button mat-fab color="primary" class="add-product-button" (click)="addProduct()" matTooltip="Add Product">
+    +
+  </button>
+  
