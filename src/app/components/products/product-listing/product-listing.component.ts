@@ -23,13 +23,12 @@ export class ProductListingComponent {
   dataSource1 = new MatTableDataSource();
   constructor(private apiService: LocalApiService, private router: Router) {
     this.products$ = this.apiService.products$;
-    console.log(this.products$)
     
   }
   get products() {
     return this.apiService.products$;
   }
-  displayedColumns = ['id', 'name', 'price', 'category', 'inStock', 'actions'];
+  displayedColumns = ['name', 'price', 'category', 'inStock', 'actions'];
 
  
 
@@ -41,7 +40,6 @@ export class ProductListingComponent {
     this.apiService.toggleStock(id);
   }
   editProduct(product: Product) {
-   console.log(this.apiService.getProductById(product.id));
     this.router.navigateByUrl('/product/add-product/' + product.id);
 
   }
